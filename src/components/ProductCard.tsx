@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import React from "react";
-import MainButton from "../common/MainButton";
+
 import { useRouter } from "next-nprogress-bar";
+import MainButton from "./common/MainButton";
 
 
 interface IProps {
@@ -91,8 +92,6 @@ function ProductCard({
 					)}
 				</div>
 			</div>
-
-			{/* OVERLAY START */}
 			<motion.div
 				className={cn(
 					"absolute p-4 left-0 right-0 top-0 bottom-0 bg-[#3A3A3A]/80"

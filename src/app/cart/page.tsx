@@ -1,10 +1,10 @@
 import CartItems from '@/components/cart-items';
-import { CartHeroSection } from '@/components/CartHeroSection';
+import Hero from '@/components/common/Hero';
 
 export default function CartPage() {
 	return (
 		<main>
-			<CartHeroSection />
+			<Hero title="Cart" />
 			<CartItems />
 		</main>
 	);

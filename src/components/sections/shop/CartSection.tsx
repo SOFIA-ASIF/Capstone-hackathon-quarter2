@@ -6,7 +6,7 @@ import { useRouter } from "next-nprogress-bar";
 
 export default function CartSection({ toggleShowCart }: { toggleShowCart: () => void }) {
 
-	const subTotal = 0
+	const subTotal = 100000
 	const router = useRouter();
 
 	return (
@@ -20,9 +20,7 @@ export default function CartSection({ toggleShowCart }: { toggleShowCart: () => 
 				</div>
 				<Separator />
 				<div className="mt-[24px] flex flex-col gap-[20px]">
-					<div
-						className="flex  items-center gap-[32px] w-full justify-between"
-					>
+					<div className="flex items-center gap-[32px] w-full justify-between">
 						<div>
 							<img
 								src="/images/p_4.png"
@@ -30,7 +28,6 @@ export default function CartSection({ toggleShowCart }: { toggleShowCart: () => 
 								className="w-[108px] h-[105px] rounded-[1rem] object-cover"
 							/>
 						</div>
-
 						<div>
 							<p className="text-normal">Respira Xen</p>
 							<p>
@@ -40,11 +37,49 @@ export default function CartSection({ toggleShowCart }: { toggleShowCart: () => 
 								</span>
 							</p>
 						</div>
-
-						<div
-							className="cursor-pointer"
-							onClick={() => { }}
-						>
+						<div className="cursor-pointer" onClick={() => {}}>
+							<img src={"/images/delete_icon.png"} alt="close icon" />
+						</div>
+					</div>
+					<div className="flex items-center gap-[32px] w-full justify-between">
+						<div>
+							<img
+								src="/images/p_1.png"
+								alt="product image"
+								className="w-[108px] h-[105px] rounded-[1rem] object-cover"
+							/>
+						</div>
+						<div>
+							<p className="text-normal">Syltherine</p>
+							<p>
+								1 X{" "}
+								<span className="text-primary font-medium text-sm">
+									27000
+								</span>
+							</p>
+						</div>
+						<div className="cursor-pointer" onClick={() => {}}>
+							<img src={"/images/delete_icon.png"} alt="close icon" />
+						</div>
+					</div>
+					<div className="flex items-center gap-[32px] w-full justify-between">
+						<div>
+							<img
+								src="/images/p_3.png"
+								alt="product image"
+								className="w-[108px] h-[105px] rounded-[1rem] object-cover"
+							/>
+						</div>
+						<div>
+							<p className="text-normal">Lolito Bilo</p>
+							<p>
+								5 X{" "}
+								<span className="text-primary font-medium text-sm">
+									500
+								</span>
+							</p>
+						</div>
+						<div className="cursor-pointer" onClick={() => {}}>
 							<img src={"/images/delete_icon.png"} alt="close icon" />
 						</div>
 					</div>

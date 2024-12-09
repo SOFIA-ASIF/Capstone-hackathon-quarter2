@@ -1,20 +1,12 @@
 import { Input } from "@/components/ui/input";
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectLabel,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 
 function ShopFilterSection() {
 	return (
-		<section className="bg-[#F9F1E7] px-4 py-[31px] w-full flex flex-col md:flex-row gap-8 justify-around items-center">
+		<section className="hidden bg-[#F9F1E7] px-4 py-[31px] md:flex flex-col md:flex-row gap-8 justify-around items-center">
 			{/* LHS */}
-			<div className="flex flex-col md:flex-row gap-8 items-center">
+			<div className="flex gap-8 items-center">
 				<div className="flex gap-2 items-center hover:cursor-pointer">
 					<img
 						src="/images/filter_icon.png"
@@ -39,19 +31,19 @@ function ShopFilterSection() {
 				<p className="text-normal">Showing 1 - 16 of 32 results</p>
 			</div>
 			{/* RHS */}
-			<div className="flex flex-col md:flex-row gap-8">
-				<div className="flex gap-[17px] items-center">
-					<p className="text-[20px]">Show</p>
+			<div className="flex gap-8">
+				<div className="flex flex-col md:flex-row gap-[10ppx] md:gap-[17px]items-center">
+					<p className="text-[16px] md:text-[20px]">Show</p>
 					<Input type="number" className="bg-white w-[65px] h-[55px]" />
 				</div>
-				<div className="flex gap-[17px] items-center">
-					<p className="text-[20px]">Sort by</p>
+				<div className="flex flex-col md:flex-row gap-[10ppx] md:gap-[17px] items-start md:items-center">
+					<p className="text-[16px] md:text-[20px]">Sort by</p>
 					<Select>
-						<SelectTrigger className="w-[180px] h-[55px]">
+						<SelectTrigger className="w-[100px] md:w-[180px] h-[55px]">
 							<SelectValue placeholder="Select a filter" />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectGroup>
+							<SelectGroup> 
 								<SelectLabel>Filter</SelectLabel>
 								<SelectItem value="default">Default</SelectItem>
 								<SelectItem value="type">Type</SelectItem>

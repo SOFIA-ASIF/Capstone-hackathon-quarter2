@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "../cards/ProductCard";
+import ProductCard from "../ProductCard";
 import MainButton from "../common/MainButton";
 import { PRODUCTS } from "@/lib/constants";
 

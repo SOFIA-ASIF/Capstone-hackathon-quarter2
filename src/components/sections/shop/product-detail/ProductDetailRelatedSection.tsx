@@ -1,4 +1,4 @@
-import ProductCard from "@/components/cards/ProductCard";
+import ProductCard from "@/components/ProductCard";
 import MainButton from "@/components/common/MainButton";
 import React from "react";
 

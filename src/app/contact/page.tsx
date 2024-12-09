@@ -1,14 +1,14 @@
+import Hero from '@/components/common/Hero';
 import ContactForm from '@/components/contactform';
 import Location from '@/components/Icons/location';
 import Phone from '@/components/Icons/phone';
 import Time from '@/components/Icons/time';
-import { ContactHeroSection } from '@/components/sections/ContactHeroSection';
 import ShopBannerSection from '@/components/sections/shop/ShopBannerSection';
 
 export default function AboutPage() {
 	return (
 		<main>
-			<ContactHeroSection />
+			<Hero title='Contact' />
 			<section className="flex flex-col gap-20 pt-24 pb-16">
 				<article className="text-center xl:w-5/12 2xl:w-3/12 mx-auto flex flex-col gap-4">
 					<h2 className="text-4xl font-semibold">Get In Touch With Us</h2>

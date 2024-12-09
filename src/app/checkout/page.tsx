@@ -1,6 +1,6 @@
+import { CheckoutBillingForm } from "@/components/CheckoutBillingForm";
 import Hero from "@/components/common/Hero";
-import { CheckoutBillingForm } from "@/components/forms/CheckoutBillingForm";
-import CheckoutDetailSection from "@/components/sections/checkout/CheckoutDetailSection";
+import CheckoutDetailSection from "@/components/sections/CheckoutDetailSection";
 import ShopBannerSection from "@/components/sections/shop/ShopBannerSection";
 
 export default function CheckoutPage() {

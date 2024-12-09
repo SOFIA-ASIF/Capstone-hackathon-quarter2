@@ -2,16 +2,12 @@
 
 import { Separator } from "@/components/ui/separator";
 import ReactStars from "react-stars";
-import {
-	Pagination,
-	PaginationContent,
-	PaginationItem,
-	PaginationLink,
-} from "@/components/ui/pagination";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
 import MainButton from "@/components/common/MainButton";
 import { MinusIcon, PlusIcon } from "lucide-react";
+import { PRODUCTS } from "@/lib/constants";
 
-export default function ProductDetailShowcaseSection() {
+const ProductDetailShowcaseSection = ({productId,}: {productId: string;}) => {
 
 	const mini = [
 		"/images/sofa_mini.png",
@@ -50,7 +46,10 @@ export default function ProductDetailShowcaseSection() {
 			),
 		},
 	];
-	const quantity = 1
+
+	const specificProduct = PRODUCTS.find((product) => {
+		return product.id === productId;
+	});
 
 	return (
 		<section className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -68,7 +67,7 @@ export default function ProductDetailShowcaseSection() {
 				</div>
 				<div className=" flex flex-col bg-primary-light  rounded-[8px] h-[500px] justify-center items-center">
 					<img
-						src="/images/p_3.png"
+						src={specificProduct?.imageUrl}
 						alt="product"
 						className="w-[425px] h-[500px] object-cover rounded-[10px]"
 					/>
@@ -76,9 +75,9 @@ export default function ProductDetailShowcaseSection() {
 			</div>
 			{/* RHS */}
 			<div>
-				<p className="text-[42px]">Respira Xen</p>
+				<p className="text-[42px]">{specificProduct?.title}</p>
 				<p className="text-customGray text-[24px] font-medium">
-					7000
+					Rs. {specificProduct?.price}
 				</p>
 				<div className="flex items-center gap-[22px]">
 					<ReactStars count={5} color1="#FFC700" size={24} color2={"#FFC700"} />
@@ -115,17 +114,23 @@ export default function ProductDetailShowcaseSection() {
 						</PaginationContent>
 					</Pagination>
 				</div>
-
-				<div className="flex gap-[18px] items-center mt-32">
+				<div className="flex flex-col md:flex-row gap-[18px] items-center mt-32">
 					<div className="inline-flex h-[64px] px-[15px] gap-[35px] items-center border border-customGray2 rounded-[10px]">
-						<MinusIcon className="cursor-pointer" />
-						<p className="font-semibold text-normal select-none">{quantity}</p>
-						<PlusIcon className="cursor-pointer" />
+						<MinusIcon
+							className="cursor-pointer"
+							onClick={() => {}}
+						/>
+						<p className="font-semibold text-normal select-none">1</p>
+						<PlusIcon
+							className="cursor-pointer"
+							onClick={() => {}}
+						/>
 					</div>
 					<div>
 						<MainButton
 							text="Add to Cart"
 							classes="bg-white text-black hover:bg-white border border-black rounded-[15px]"
+							action={() => {}}
 						/>
 					</div>
 				</div>
@@ -147,3 +152,5 @@ export default function ProductDetailShowcaseSection() {
 		</section>
 	);
 }
+
+export default ProductDetailShowcaseSection;

@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/select";
 import Countries from "@/lib/json/country.json";
 import { BillingInfoInputValidation } from "@/lib/validations";
-import MainButton from "../common/MainButton";
+import MainButton from "./common/MainButton";
 
 const FormSchema = BillingInfoInputValidation;
 

@@ -1,4 +1,4 @@
-# Furniro: A Sleek E-commerce Furniture 
+# Furniro: A Sleek E-commerce Furniture website
 
 ### Overview
 

@@ -26,7 +26,6 @@ export default function ProductDetailPage({
 			<div className="mt-8 px-4 md:px-[50px] lg:px-[100px]">
 				<ProductDetailExtraInfoSection />
 			</div>
-
 			<div className="my-[40px]">
 				<Separator />
 			</div>

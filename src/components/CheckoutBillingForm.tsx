@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Countries from "@/lib/json/country.json";
 import { BillingInfoInputValidation } from "@/lib/validations";
-import MainButton from "./common/MainButton";
+import { Button } from "./ui/button";
 
 const FormSchema = BillingInfoInputValidation;
 
@@ -210,9 +210,7 @@ export function CheckoutBillingForm() {
 					)}
 				/>
 				<div className="mt-6">
-					<MainButton
-						text="Save Billing Info"
-					/>
+					<Button>Save Billing Info</Button>
 				</div>
 			</form>
 		</Form>

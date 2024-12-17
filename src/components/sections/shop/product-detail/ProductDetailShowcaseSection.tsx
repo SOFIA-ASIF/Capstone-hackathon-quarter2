@@ -3,9 +3,9 @@
 import { Separator } from "@/components/ui/separator";
 import ReactStars from "react-stars";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
-import MainButton from "@/components/common/MainButton";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { PRODUCTS } from "@/lib/constants";
+import { Button } from "@/components/ui/button";
 
 const ProductDetailShowcaseSection = ({productId,}: {productId: string;}) => {
 
@@ -127,11 +127,11 @@ const ProductDetailShowcaseSection = ({productId,}: {productId: string;}) => {
 						/>
 					</div>
 					<div>
-						<MainButton
-							text="Add to Cart"
-							classes="bg-white text-black hover:bg-white border border-black rounded-[15px]"
-							action={() => {}}
-						/>
+						<Button
+							className="bg-white text-black hover:bg-white border border-black rounded-[15px]"
+						>
+							Add to Cart
+						</Button>
 					</div>
 				</div>
 

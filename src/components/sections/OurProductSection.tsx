@@ -1,7 +1,7 @@
 import React from "react";
 import ProductCard from "../ProductCard";
-import MainButton from "../common/MainButton";
 import { PRODUCTS } from "@/lib/constants";
+import { Button } from "../ui/button";
 
 function OurProductSection() {
   return (
@@ -15,10 +15,9 @@ function OurProductSection() {
         ))}
       </div>
       <div className="flex justify-center mt-[32px]">
-        <MainButton
-          text="Show More"
-          classes="bg-transparent hover:bg-transparent text-primary font-bold border border-primary h-[48px]"
-        />
+        <Button
+          className="bg-transparent hover:bg-transparent text-primary font-bold border border-primary h-[48px]"
+        >Show more</Button>
       </div>
     </section>
   );

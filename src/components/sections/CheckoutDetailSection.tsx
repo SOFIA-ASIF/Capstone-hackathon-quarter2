@@ -1,6 +1,6 @@
 "use client";
-import MainButton from "@/components/common/MainButton";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "../ui/button";
 
 function CheckoutDetailSection() {
   return (
@@ -40,10 +40,7 @@ function CheckoutDetailSection() {
       </p>
 
       <div className="my-16 flex justify-center">
-        <MainButton
-          text="Place order"
-          classes="bg-white hover:bg-white border  border-black rounded-[15px] h-[55px] text-black"
-        />
+        <Button className="bg-white hover:bg-white border  border-black rounded-[15px] h-[55px] text-black">Place Order</Button>
       </div>
     </section>
   );

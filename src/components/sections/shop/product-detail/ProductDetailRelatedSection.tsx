@@ -1,5 +1,5 @@
 import ProductCard from "@/components/ProductCard";
-import MainButton from "@/components/common/MainButton";
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 function ProductDetailRelatedSection() {
@@ -98,10 +98,9 @@ function ProductDetailRelatedSection() {
 				))}
 			</div>
 			<div className="flex justify-center mt-[32px]">
-				<MainButton
-					text="Show More"
-					classes="bg-transparent hover:bg-transparent text-primary font-bold border border-primary h-[48px]"
-				/>
+				<Button
+					className="bg-transparent hover:bg-transparent text-primary font-bold border border-primary h-[48px]"
+				>Show More</Button>
 			</div>
 		</section>
 	);

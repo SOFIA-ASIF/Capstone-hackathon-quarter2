@@ -1,6 +1,6 @@
 "use client";
 
-import MainButton from "@/components/common/MainButton";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next-nprogress-bar";
 
@@ -96,11 +96,10 @@ export default function CartSection({ toggleShowCart }: { toggleShowCart: () => 
 					<div>
 						<Separator />
 						<div className="mt-8 flex justify-center">
-							<MainButton
-								text="Checkout"
-								classes="bg-white hover:bg-white text-black  border border-black rounded-[50px] h-[40px] w-[150px]"
-								action={() => router.push("/checkout")}
-							/>
+							<Button
+								className="bg-white hover:bg-white text-black  border border-black rounded-[50px] h-[40px] w-[150px]"
+								onClick={() => router.push("/checkout")}
+							>CheckOut</Button>
 						</div>
 					</div>
 				) : (

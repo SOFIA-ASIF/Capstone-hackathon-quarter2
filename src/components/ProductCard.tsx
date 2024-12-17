@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import React from "react";
 
 import { useRouter } from "next-nprogress-bar";
-import MainButton from "./common/MainButton";
+import { Button } from "./ui/button";
 
 
 interface IProps {
@@ -100,11 +100,12 @@ function ProductCard({
 			>
 				<div className="pt-[30%]">
 					<div className="flex justify-center">
-						<MainButton
-							text="View product"
-							classes="bg-white text-primary font-bold hover:bg-white"
-							action={() => router.push(`/shop/product/${id}`)}
-						/>
+						<Button
+							className="bg-white text-primary p-8 font-bold hover:bg-white"
+							onClick={() => router.push(`/shop/product/${id}`)}
+						>
+							View Products
+						</Button>
 					</div>
 					<div className="flex justify-center gap-5 mt-[24px]">
 						{icons.map((icon, index) => (

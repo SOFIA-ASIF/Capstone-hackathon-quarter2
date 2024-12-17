@@ -1,5 +1,5 @@
 import React from "react";
-import MainButton from "../common/MainButton";
+import { Button } from "../ui/button";
 
 function HeroSection() {
 	return (
@@ -15,7 +15,7 @@ function HeroSection() {
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />
 					Ut elit tellus, luctus nec ullamcorper mattis.
 				</p>
-				<MainButton text="BUY NOW" classes="w-[222px]" />
+				<Button className="w-[222px] bg-primary">Buy Now</Button>
 			</div>
 		</section>
 	);

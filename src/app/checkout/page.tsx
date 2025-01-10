@@ -1,7 +1,7 @@
 import { CheckoutBillingForm } from "@/components/CheckoutBillingForm";
+import FeaturesBannerSection from "@/components/common/FeaturesBannerSection";
 import Hero from "@/components/common/Hero";
 import CheckoutDetailSection from "@/components/sections/CheckoutDetailSection";
-import ShopBannerSection from "@/components/sections/shop/ShopBannerSection";
 
 export default function CheckoutPage() {
 	return (
@@ -11,7 +11,7 @@ export default function CheckoutPage() {
 				<CheckoutBillingForm />
 				<CheckoutDetailSection />
 			</div>
-			<ShopBannerSection />
+			<FeaturesBannerSection />
 		</div>
 	);
 }

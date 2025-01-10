@@ -3,7 +3,7 @@ import ContactForm from '@/components/contactform';
 import Location from '@/components/Icons/location';
 import Phone from '@/components/Icons/phone';
 import Time from '@/components/Icons/time';
-import ShopBannerSection from '@/components/sections/shop/ShopBannerSection';
+import FeaturesBannerSection from '@/components/common/FeaturesBannerSection';
 
 export default function AboutPage() {
 	return (
@@ -51,7 +51,7 @@ export default function AboutPage() {
 					<ContactForm />
 				</article>
 			</section>
-			<ShopBannerSection />
+			<FeaturesBannerSection />
 		</main>
 	);
 }

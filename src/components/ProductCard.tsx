@@ -8,28 +8,24 @@ import React from "react";
 import { useRouter } from "next-nprogress-bar";
 import { Button } from "./ui/button";
 
+type ProductTypes = {
+    _id: string,
+	slug: string,
+    title: string,
+    subtitle: string,
+    description: string,
+    imageUrl: string,
+    SalesPrice: string,
+    DiscountPer: string,
+    ShowPrice: string,
+    isDiscounted: boolean,
+};
 
 interface IProps {
-	id: string;
-	imageUrl: string;
-	title: string;
-	description: string;
-	price: string;
-	otherPrice: string;
-	type: string;
-	typeValue: string;
+	item: ProductTypes;
 }
 
-function ProductCard({
-	id,
-	imageUrl,
-	title,
-	description,
-	price,
-	otherPrice,
-	type,
-	typeValue,
-}: IProps) {
+function ProductCard( { item } : IProps) {
 	const router = useRouter();
 	const icons = [
 		{
@@ -55,41 +51,32 @@ function ProductCard({
 			animate="initial"
 			whileHover="animate"
 			viewport={{ once: false }}
-			transition={{ duration: 0.4 }}
-			className="relative"
+			transition={{ duration: 0.5 }}
+			className="relative cursor-pointer"
+			onClick={() => router.push(`/shop/product/${item._id}`)}
 		>
 			<div className="relative">
 				<img
-					src={imageUrl}
+					src={item.imageUrl}
 					alt="product"
 					className="h-[301px] w-full object-cover"
 				/>
-
-				{typeValue && (
-					<div
-						className={cn(
-							"absolute top-[24px] right-[24px] w-[48px] h-[48px] rounded-full text-normal font-medium px-2 text-white flex justify-center items-center",
-							type === "DISCOUNTED"
-								? "bg-error "
-								: type === "NEW"
-									? "bg-success"
-									: ""
-						)}
-					>
-						{typeValue}
+				<div className='absolute top-[24px] right-6'>
+					{item.isDiscounted && (
+					<div className='flex items-center justify-between gap-2'>
+						<span className='w-12 h-12 rounded-full flex items-center justify-center bg-[#E97171] text-white font-medium'>-{item.DiscountPer}%</span>
 					</div>
-				)}
+					)}
+				</div>
 			</div>
 			<div className="bg-[#F4F5F7] p-4">
-				<p className="text-customBlack text-24 font-semibold">{title}</p>
+				<p className="text-customBlack text-24 font-semibold">{item.title}</p>
 				<p className="text-customGray font-medium text-normal py-[8px]">
-					{description}
+					{item.subtitle}
 				</p>
 				<div className="flex justify-between items-center">
-					<p className="text-customBlack text-20 font-semibold">{price}</p>
-					{otherPrice && (
-						<p className="line-through text-customGray">{otherPrice}</p>
-					)}
+					<p className="text-customBlack text-20 font-semibold">{item.ShowPrice}</p>
+					<p className="line-through text-customGray">{item.SalesPrice}</p>
 				</div>
 			</div>
 			<motion.div
@@ -102,7 +89,7 @@ function ProductCard({
 					<div className="flex justify-center">
 						<Button
 							className="bg-white text-primary p-8 font-bold hover:bg-white"
-							onClick={() => router.push(`/shop/product/${id}`)}
+							onClick={() => router.push(`/shop/product/${item._id}`)}
 						>
 							View Products
 						</Button>

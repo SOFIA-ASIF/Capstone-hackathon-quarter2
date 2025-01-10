@@ -1,5 +1,5 @@
+import FeaturesBannerSection from "@/components/common/FeaturesBannerSection";
 import Hero from "@/components/common/Hero";
-import ShopBannerSection from "@/components/sections/shop/ShopBannerSection";
 import ShopFilterSection from "@/components/sections/shop/ShopFilterSection";
 import ShopPaginationSection from "@/components/sections/shop/ShopPaginationSection";
 import ShopProductSection from "@/components/sections/shop/ShopProductSection";
@@ -15,7 +15,7 @@ function ShopPage() {
 			<div className="my-[70px]">
 				<ShopPaginationSection />
 			</div>
-			<ShopBannerSection />
+			<FeaturesBannerSection />
 		</div>
 	);
 }

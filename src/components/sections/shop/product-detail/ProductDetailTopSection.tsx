@@ -1,13 +1,18 @@
+"use client"
 import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const ProductDetailTopSection = ({product_id,}: { product_id: string;}) => {
+
+	const router = useRouter()
+
 	return (
 		<section className="bg-primary-light px-4 md:px-[70px] flex h-[100px] gap-3 items-center">
-			<div className="text-customGray2">Home</div>
+			<div className="text-customGray2 cursor-pointer" onClick={() => router.push("/")}>Home</div>
 			<ChevronRight />
-			<div className="text-customGray2">Shop</div>
+			<div className="text-customGray2 cursor-pointer" onClick={() => router.push("/shop")}>Shop</div>
 			<ChevronRight />
 			<Separator
 				orientation="vertical"

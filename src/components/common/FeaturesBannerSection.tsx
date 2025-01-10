@@ -1,6 +1,6 @@
 import React from "react";
 
-function ShopBannerSection() {
+function FeaturesBannerSection() {
 	const data = [
 		{
 			iconUrl: "/images/banner_icon_1.png",
@@ -44,4 +44,4 @@ function ShopBannerSection() {
 	);
 }
 
-export default ShopBannerSection;
+export default FeaturesBannerSection;

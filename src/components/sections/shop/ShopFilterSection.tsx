@@ -32,7 +32,7 @@ function ShopFilterSection() {
 			</div>
 			{/* RHS */}
 			<div className="flex gap-8">
-				<div className="flex flex-col md:flex-row gap-[10ppx] md:gap-[17px]items-center">
+				<div className="flex flex-col md:flex-row gap-[10ppx] md:gap-[17px] items-center">
 					<p className="text-[16px] md:text-[20px]">Show</p>
 					<Input type="number" className="bg-white w-[65px] h-[55px]" />
 				</div>

@@ -33,7 +33,7 @@ const PaginationItem = React.forwardRef<
   <li
     ref={ref}
     className={cn(
-      "bg-[#F9F1E7] h-[60px] w-[60px] hover:bg-[#F9F1E7] flex justify-center items-center rounded-[10px]",
+      "bg-[#F9F1E7] h-[40px] w-[40px] hover:bg-[#F9F1E7] flex justify-center items-center rounded-[10px]",
       className
     )}
     {...props}
@@ -60,7 +60,7 @@ const PaginationLink = ({
         size,
       }),
       className,
-      "hover:bg-[#F9F1E7] h-[60px] w-[60px] text-20",
+      "hover:bg-[#F9F1E7] h-[40px] w-[40px] text-20",
       isActive ? "bg-primary hover:bg-primary text-white hover:text-white" : ""
     )}
     {...props}

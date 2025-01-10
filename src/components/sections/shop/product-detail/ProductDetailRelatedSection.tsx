@@ -1,100 +1,44 @@
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import { client } from "@/sanity/lib/client";
 
-function ProductDetailRelatedSection() {
-	const data = [
-		{
-			id: "1",
-			imageUrl: "/images/p_1.png",
-			title: "Syltherine",
-			description: "Stylish cafe chair",
-			price: "2.500.000",
-			otherPrice: "3.500.000",
-			type: "DISCOUNTED",
-			typeValue: "-30%",
-		},
-		{
-			id: "2",
-			imageUrl: "/images/p_2.png",
-			title: "Leviosa",
-			description: "Stylish cafe chair",
-			price: "2.500.000",
-			otherPrice: "3.500.000",
-			type: "DISCOUNTED",
-			typeValue: "-30%",
-		},
-		{
-			id: "3",
-			imageUrl: "/images/p_3.png",
-			title: "Lolito",
-			description: "Luxury big sofa",
-			price: "7.000.000",
-			otherPrice: "14.000.000",
-			type: "DISCOUNTED",
-			typeValue: "-50%",
-		},
-		{
-			id: "4",
-			imageUrl: "/images/p_4.png",
-			title: "Respira",
-			description: "Outdoor bar table and stool",
-			price: "500.000",
-			otherPrice: "",
-			type: "NEW",
-			typeValue: "New",
-		},
-		{
-			id: "5",
-			imageUrl: "/images/p_5.png",
-			title: "Grifo",
-			description: "Night lamp",
-			price: "1.500.000",
-			otherPrice: "",
-			type: "NORMAL",
-			typeValue: "",
-		},
+interface ProductTypes{
+    _id: string;
+	slug: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    imageUrl: string;
+    SalesPrice: string;
+    DiscountPer: string;
+    ShowPrice: string;
+    isDiscounted: boolean;
+};
 
-		{
-			id: "6",
-			imageUrl: "/images/p_6.png",
-			title: "Muggo",
-			description: "Small mug",
-			price: "150.000",
-			otherPrice: "",
-			type: "NEW",
-			typeValue: "New",
-		},
-		{
-			id: "7",
-			imageUrl: "/images/p_7.png",
-			title: "Pingky",
-			description: "Cute bed set",
-			price: "7.000.000",
-			otherPrice: "14.000.000",
-			type: "DISCOUNTED",
-			typeValue: "-50%",
-		},
+async function getData(): Promise<ProductTypes[]> {
+	const PRODUCTS_QUERY = `*[
+		_type == "product"
+		&& defined(slug.current)
+		][0...4]{_id, title, slug, subtitle, description, SalesPrice, ShowPrice, isDiscounted, DiscountPer, "imageUrl": image[0].asset->url}`;
 
-		{
-			id: "8",
-			imageUrl: "/images/p_8.png",
-			title: "Potty",
-			description: "Minimalist flower pot",
-			price: "500.000",
-			otherPrice: "",
-			type: "NEW",
-			typeValue: "New",
-		},
-	];
+	const productsFromCMS = await client.fetch(PRODUCTS_QUERY, {});
+	console.log(productsFromCMS)
+
+	return productsFromCMS
+}
+
+const ProductDetailRelatedSection = async () => {
+	
+	const products = await getData()
+
 	return (
 		<section className="w-full overflow-x-hidden">
 			<div>
 				<p className="text-[32px] font-bold text-center">Related Products</p>
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-[20px] mt-[30px]">
-				{data.map((item, index) => (
-					<ProductCard {...item} key={index} />
+				{products.map((item: ProductTypes, index) => (
+					<ProductCard item={item} key={index} />
 				))}
 			</div>
 			<div className="flex justify-center mt-[32px]">

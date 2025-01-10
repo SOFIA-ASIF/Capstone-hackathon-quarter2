@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import ProductDetailExtraInfoSection from "@/components/sections/shop/product-detail/ProductDetailExtraInfoSection";
 import ProductDetailRelatedSection from "@/components/sections/shop/product-detail/ProductDetailRelatedSection";

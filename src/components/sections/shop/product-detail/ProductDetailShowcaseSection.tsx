@@ -32,7 +32,6 @@ const SINGLE_PRODUCT_QUERY = `*[_type == "product" && _id == $id][0]{
 const getData = async (productId: string): Promise<ProductTypes | null> => {
 	try {
 		const productFromCMS = await client.fetch(SINGLE_PRODUCT_QUERY, { id: productId });
-		console.log(productFromCMS);
 		return productFromCMS;
 	} catch (error) {
 		console.error("Error fetching product:", error);

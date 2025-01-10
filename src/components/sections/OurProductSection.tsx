@@ -22,7 +22,6 @@ async function getData(): Promise<ProductTypes[]> {
 		][0...8]{_id, title, slug, subtitle, description, SalesPrice, ShowPrice, isDiscounted, DiscountPer, "imageUrl": image[0].asset->url}`;
 
 	const productsFromCMS = await client.fetch(PRODUCTS_QUERY, {});
-	console.log(productsFromCMS)
 
 	return productsFromCMS
 }

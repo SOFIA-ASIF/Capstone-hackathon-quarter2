@@ -28,7 +28,7 @@ export default function ProductDetailPage({
 				<Separator />
 			</div>
 			<div className="mt-8 px-4 md:px-[50px] lg:px-[100px]">
-				<ProductDetailRelatedSection />
+				{/* <ProductDetailRelatedSection /> */}
 			</div>
 		</div>
 	);

@@ -1,38 +1,44 @@
+"use client"
+import { useState, useEffect } from "react"
 import ProductCard from "@/components/ProductCard";
-import { client } from "@/sanity/lib/client";
+import { Product } from "@/types/productType";
 
-interface ProductTypes{
-    _id: string;
-    slug: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    imageUrl: string;
-    SalesPrice: string;
-    DiscountPer: string;
-    ShowPrice: string;
-    isDiscounted: boolean;
-};
+const ShopProductSection = () => {
+    
+    const [products, setProducts] = useState<Product[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-async function getData(): Promise<ProductTypes[]> {
-    const PRODUCTS_QUERY = `*[
-        _type == "product"
-        && defined(slug.current)
-        ]{_id, title, slug, subtitle, description, SalesPrice, ShowPrice, isDiscounted, DiscountPer, "imageUrl": image[0].asset->url}`;
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/products');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log(data)
+                setProducts(data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            } finally {
+                setIsLoading(false)
+            }
+        };
+        fetchData();
+    }, []);
 
-    const productsFromCMS = await client.fetch(PRODUCTS_QUERY, {});
-
-    return productsFromCMS
-}
-
-const ShopProductSection = async () => {
-
-    const products = await getData()
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+    
+    if (!products) {
+        return <div>Error loading products</div>;
+    }
 
 	return (
 		<section>
 			<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-[32px] mt-[46px]">
-				{products.map((item: ProductTypes) => (
+				{products.map((item: Product) => (
 					<ProductCard item={item} key={item._id} />
 				))}
 			</div>

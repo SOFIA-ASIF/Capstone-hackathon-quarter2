@@ -1,28 +1,13 @@
-"use client";
-
+"use client"
 import { motion } from "framer-motion";
-
 import { cn } from "@/lib/utils";
 import React from "react";
-
-import { useRouter } from "next-nprogress-bar";
 import { Button } from "./ui/button";
-
-type ProductTypes = {
-    _id: string,
-	slug: string,
-    title: string,
-    subtitle: string,
-    description: string,
-    imageUrl: string,
-    SalesPrice: string,
-    DiscountPer: string,
-    ShowPrice: string,
-    isDiscounted: boolean,
-};
+import { Product } from "@/types/productType";
+import { useRouter } from "next/navigation";
 
 interface IProps {
-	item: ProductTypes;
+	item: Product;
 }
 
 function ProductCard( { item } : IProps) {
@@ -61,22 +46,26 @@ function ProductCard( { item } : IProps) {
 					alt="product"
 					className="h-[301px] w-full object-cover"
 				/>
-				<div className='absolute top-[24px] right-6'>
-					{item.isDiscounted && (
-					<div className='flex items-center justify-between gap-2'>
-						<span className='w-12 h-12 rounded-full flex items-center justify-center bg-[#E97171] text-white font-medium'>-{item.DiscountPer}%</span>
-					</div>
+				<div className='flex gap-2 absolute top-[24px] right-6'>
+					{item.isNew && (
+						<div className='flex items-center justify-between gap-2'>
+							<span className='w-12 h-12 rounded-full flex items-center justify-center bg-primary text-white font-medium'>New</span>
+						</div>
+					)}
+					{item.discountPercentage > 0 && (
+						<div className='flex items-center justify-between gap-2'>
+							<span className='w-12 h-12 rounded-full flex items-center justify-center bg-[#E97171] text-white font-medium'>{item.discountPercentage}</span>
+						</div>
 					)}
 				</div>
 			</div>
 			<div className="bg-[#F4F5F7] p-4">
 				<p className="text-customBlack text-24 font-semibold">{item.title}</p>
-				<p className="text-customGray font-medium text-normal py-[8px]">
-					{item.subtitle}
+				<p className="text-customGray font-medium text-normal py-[8px] truncate">
+					{item.description}
 				</p>
 				<div className="flex justify-between items-center">
-					<p className="text-customBlack text-20 font-semibold">{item.ShowPrice}</p>
-					<p className="line-through text-customGray">{item.SalesPrice}</p>
+					<p className="text-customBlack text-20 font-semibold">{item.price}$</p>
 				</div>
 			</div>
 			<motion.div

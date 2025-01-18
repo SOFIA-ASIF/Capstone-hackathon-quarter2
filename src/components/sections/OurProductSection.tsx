@@ -1,34 +1,41 @@
+"use client"
+import { useEffect, useState } from "react";
 import ProductCard from "../ProductCard";
 import { Button } from "../ui/button";
-import { client } from "@/sanity/lib/client";
+import { Product } from "@/types/productType";
 
-interface ProductTypes{
-    _id: string;
-	slug: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    imageUrl: string;
-    SalesPrice: string;
-    DiscountPer: string;
-    ShowPrice: string;
-    isDiscounted: boolean;
-};
+const OurProductSection = () => {
 
-async function getData(): Promise<ProductTypes[]> {
-	const PRODUCTS_QUERY = `*[
-		_type == "product"
-		&& defined(slug.current)
-		][0...8]{_id, title, slug, subtitle, description, SalesPrice, ShowPrice, isDiscounted, DiscountPer, "imageUrl": image[0].asset->url}`;
+	const [products, setProducts] = useState<Product[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
 
-	const productsFromCMS = await client.fetch(PRODUCTS_QUERY, {});
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await fetch('/api/products');
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				const data = await response.json();
+				console.log(data)
+				setProducts(data.slice(0,12));
+			} catch (error) {
+				console.error('Error fetching products:', error);
+			} finally {
+				setIsLoading(false)
+			}
+		};
 
-	return productsFromCMS
-}
+		fetchData();
+	}, []);
 
-const OurProductSection = async () => {
-
-	const products = await getData()
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
+	
+	if (!products) {
+		return <div>Error loading products</div>;
+	}
 
 	return (
 		<section className="w-full overflow-x-hidden">
@@ -36,14 +43,12 @@ const OurProductSection = async () => {
 				<p className="text-[32px] font-bold text-center">Our Product</p>
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-[20px] mt-[30px]">
-				{products.map((item: ProductTypes) => (
+				{products.map((item: Product) => (
 					<ProductCard item={item} key={item._id} />
 				))}
 			</div>
 			<div className="flex justify-center mt-[32px]">
-				<Button
-					className="bg-transparent hover:bg-transparent text-primary font-bold border border-primary h-[48px]"
-				>Show more</Button>
+				<Button className="bg-transparent hover:bg-transparent text-primary font-bold border border-primary h-[48px]">Show more</Button>
 			</div>
 		</section>
 	);

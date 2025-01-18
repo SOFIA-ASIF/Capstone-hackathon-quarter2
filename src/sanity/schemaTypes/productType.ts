@@ -1,56 +1,49 @@
-import { defineField, defineType } from "sanity";
+import { defineType } from "sanity"
 
-export const productType = defineType({
-  name: "product",
-  title: "Product",
-  type: "document",
-  fields: [
-    defineField({
-      name: "title",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "slug",
-      type: "slug",
-      options: { source: "title" },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "subtitle",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "description",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "SalesPrice",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "ShowPrice",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "isDiscounted",
-      type: "boolean",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "DiscountPer",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "image",
-      type: "array",
-      title: "productImage",
-      of: [{type: 'image'}]
-    }),
-  ],
-});
+export const product = defineType({
+    name: "product",
+    title: "Product",
+    type: "document",
+    fields: [
+        {
+            name: "title",
+            title: "Title",
+            validation: (rule) => rule.required(),
+            type: "string"
+        },
+        {
+            name:"description",
+            type:"text",
+            validation: (rule) => rule.required(),
+            title:"Description",
+        },
+        {
+            name: "productImage",
+            type: "image",
+            validation: (rule) => rule.required(),
+            title: "Product Image"
+        },
+        {
+            name: "price",
+            type: "number",
+            validation: (rule) => rule.required(),
+            title: "Price",
+        },
+        {
+            name: "tags",
+            type: "array",
+            title: "Tags",
+            of: [{ type: "string" }]
+        },
+        {
+            name:"dicountPercentage",
+            type:"number",
+            title:"Discount Percentage",
+        },
+        {
+            name:"isNew",
+            type:"boolean",
+            title:"New Badge",
+        }
+    ]
+})

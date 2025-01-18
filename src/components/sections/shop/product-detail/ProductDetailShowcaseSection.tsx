@@ -1,54 +1,42 @@
+"use client"
+import { useState, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
 import { MinusIcon, PlusIcon, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { client } from "@/sanity/lib/client";
+import { Product } from "@/types/productType";
 
-interface ProductTypes{
-    _id: string;
-    slug: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    imageUrl: string;
-    SalesPrice: string;
-    DiscountPer: string;
-    ShowPrice: string;
-    isDiscounted: boolean;
-};
-const SINGLE_PRODUCT_QUERY = `*[_type == "product" && _id == $id][0]{
-	_id, 
-	title, 
-	slug, 
-	subtitle, 
-	description, 
-	SalesPrice, 
-	ShowPrice, 
-	isDiscounted, 
-	DiscountPer, 
-	"imageUrl": image[0].asset->url
-}`;
+const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 
-const getData = async (productId: string): Promise<ProductTypes | null> => {
-	try {
-		const productFromCMS = await client.fetch(SINGLE_PRODUCT_QUERY, { id: productId });
-		return productFromCMS;
-	} catch (error) {
-		console.error("Error fetching product:", error);
-		return null;
+	const [product, setProduct] = useState<Product | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await fetch(`/api/singleProduct/${productId}`);
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+				const data: Product = await response.json();
+				setProduct(data);
+			} catch (err) {
+				console.log(err)
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchData();
+	}, [productId]);
+
+	if (isLoading) {
+		return <div>Loading...</div>;
 	}
-};
 
-const ProductDetailShowcaseSection = async ({productId}: {productId: string;}) => {
-
-	const specificProduct = await getData(productId)
-
-	const mini = [
-		"/images/sofa_mini.png",
-		"/images/sofa_mini.png",
-		"/images/sofa_mini.png",
-		"/images/sofa_mini.png",
-	];
+	if (!product) {
+		return <div>Product not found</div>;
+	}
 
 	const colors = [
 		{
@@ -100,22 +88,12 @@ const ProductDetailShowcaseSection = async ({productId}: {productId: string;}) =
 	];
 
 	return (
-		<section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+		<section className="grid grid-cols-1 md:grid-cols-2 gap-2">
 			{/* LHS */}
-			<div className="flex gap-8 ">
-				<div className="hidden md:inline-flex flex-col gap-8">
-					{mini.map((item, index) => (
-						<div
-							key={index}
-							className="bg-primary-light h-[80px] rounded-[8px] inline-flex items-center px-2"
-						>
-							<img src={item} className="w-full h-full" alt="product mini glance" />
-						</div>
-					))}
-				</div>
+			<div className="flex">
 				<div className=" flex flex-col bg-primary-light  rounded-[8px] h-[500px] justify-center items-center">
 					<img
-						src={specificProduct?.imageUrl}
+						src={product.imageUrl}
 						alt="product"
 						className="w-[425px] h-[500px] object-cover rounded-[10px]"
 					/>
@@ -123,9 +101,9 @@ const ProductDetailShowcaseSection = async ({productId}: {productId: string;}) =
 			</div>
 			{/* RHS */}
 			<div>
-				<p className="text-[40px]">{specificProduct?.title}</p>
+				<p className="text-[40px]">{product.title}</p>
 				<p className="text-[#959595] lg:text-2xl text-lg lg:mt-0 text-[24px] font-medium mt-2">
-					{specificProduct?.ShowPrice}
+					{product.price}$
 				</p>
 				<div className="flex items-center gap-[22px]">
 					<div className="flex">
@@ -143,7 +121,7 @@ const ProductDetailShowcaseSection = async ({productId}: {productId: string;}) =
 				</div>
 
 				<p className="mt-4">
-					{specificProduct?.description}
+					{product.description}
 				</p>
 
 				<div className="mb-6">

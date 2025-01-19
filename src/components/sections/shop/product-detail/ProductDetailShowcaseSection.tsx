@@ -5,11 +5,27 @@ import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@
 import { MinusIcon, PlusIcon, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/types/productType";
+import { useAtom } from "jotai/react";
+import { cartAtom } from "@/lib/jotai";
 
 const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 
 	const [product, setProduct] = useState<Product | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const[quantity, setQuantity] = useState(0)
+	const[size, setSize] = useState<"S" | "M" | "L">("S")
+	const[cart, setCart] = useAtom(cartAtom)
+
+	const handleQuantityIncrement = () => {
+		// maximum cannot be more than 5
+		if (quantity === 5) return;
+		setQuantity(quantity + 1);
+	}
+
+	const handleQuantityDecrement = () => {
+		if (quantity === 1) return;
+		setQuantity(quantity - 1);
+	}
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -58,16 +74,8 @@ const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 
 	const extraDetailsData = [
 		{
-			item: "SKU",
-			value: "SS001",
-		},
-		{
-			item: "Category",
-			value: "Sofas",
-		},
-		{
 			item: "Tags",
-			value: "Sofa, Chair, Home, Shop",
+			value: product.tags,
 		},
 		{
 			item: "Share",
@@ -86,6 +94,45 @@ const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 			),
 		},
 	];
+
+	
+	const handleAddToCart = () => {
+		const productInCart = cart.find((product: IProduct) => product.id === productId);
+	
+		// NOTE: When we already have the product in the cart [EXISTING PRODUCT]
+		if (productInCart) {
+			let updatedProducts = [];
+			const productObject: IProduct = {
+				id: productId,
+				productImageUrl: productInCart?.productImageUrl,
+				productName: productInCart?.productName,
+				quantity,
+				unitPrice: Number(productInCart?.unitPrice),
+			};
+		
+			// NOTE: Remove it from cart & set afresh
+			const filteredProducts = cart.filter(
+				(product: IProduct) => product.id !== productId
+			);
+		
+			updatedProducts = filteredProducts;
+			updatedProducts.push(productObject);
+		
+			setCart(updatedProducts);
+		}
+	
+		// NOTE: When we dont have the product already in the cart [FRESH PRODUCT]
+		if (!productInCart) {	
+			const productObject: IProduct = {
+				id: productId,
+				productImageUrl: product?.imageUrl,
+				productName: product?.title,
+				quantity,
+				unitPrice: Number(product?.price),
+			};
+			setCart((prevProducts) => [...prevProducts, productObject]);
+		}
+	};
 
 	return (
 		<section className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -131,23 +178,18 @@ const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 					<Pagination className="flex !justify-start">
 						<PaginationContent className="flex gap-[38px]">
 							<PaginationItem className="h-[40px] w-[40px] rounded-md">
-								<PaginationLink href="#" isActive>
+								<PaginationLink href="#" isActive={size === "S"} onClick={() => setSize("S")}>
+									S
+								</PaginationLink>
+							</PaginationItem>
+							<PaginationItem className="h-[40px] w-[40px] rounded-md">
+								<PaginationLink href="#" isActive={size === "M"} onClick={() => setSize("M")}>
 									M
 								</PaginationLink>
 							</PaginationItem>
 							<PaginationItem className="h-[40px] w-[40px] rounded-md">
-								<PaginationLink href="#">
+								<PaginationLink href="#" isActive={size === "L"} onClick={() => setSize("L")}>
 									L
-								</PaginationLink>
-							</PaginationItem>
-							<PaginationItem className="h-[40px] w-[40px] rounded-md">
-								<PaginationLink href="#">
-									XL
-								</PaginationLink>
-							</PaginationItem>
-							<PaginationItem className="h-[40px] w-[40px] rounded-md">
-								<PaginationLink href="#">
-									XXL
 								</PaginationLink>
 							</PaginationItem>
 						</PaginationContent>
@@ -163,18 +205,12 @@ const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
                 </div>
 				<div className="flex flex-col md:flex-row gap-[18px] items-center mt-16">
 					<div className="inline-flex h-[64px] px-[15px] gap-[35px] items-center border border-customGray2 rounded-[10px]">
-						<MinusIcon
-							className="cursor-pointer"
-						/>
-						<p className="font-semibold text-normal select-none">1</p>
-						<PlusIcon
-							className="cursor-pointer"
-						/>
+						<MinusIcon className="cursor-pointer" onClick={handleQuantityDecrement} />
+						<p className="font-semibold text-normal select-none">{quantity}</p>
+						<PlusIcon className="cursor-pointer" onClick={handleQuantityIncrement} />
 					</div>
 					<div>
-						<Button
-							className="bg-white text-black hover:bg-white border border-black rounded-[15px]"
-						>
+						<Button className="bg-primary text-white border border-primary hover:text-primary hover:bg-white rounded-[15px] h-[64px] w-[120px]" onClick={handleAddToCart}>
 							Add to Cart
 						</Button>
 					</div>

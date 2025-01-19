@@ -5,12 +5,15 @@ import React from "react";
 import { Button } from "./ui/button";
 import { Product } from "@/types/productType";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface IProps {
 	item: Product;
 }
 
 function ProductCard( { item } : IProps) {
+
+	console.log(Number(item.discountPercentage))
 	const router = useRouter();
 	const icons = [
 		{
@@ -41,10 +44,12 @@ function ProductCard( { item } : IProps) {
 			onClick={() => router.push(`/shop/product/${item._id}`)}
 		>
 			<div className="relative">
-				<img
+				<Image
 					src={item.imageUrl}
 					alt="product"
 					className="h-[301px] w-full object-cover"
+					height={300}
+					width={300}
 				/>
 				<div className='flex gap-2 absolute top-[24px] right-6'>
 					{item.isNew && (

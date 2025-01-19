@@ -5,7 +5,6 @@ const client = createClient({
   dataset: "production",
   apiVersion: "2025-01-04",
   useCdn: true,
-  token: "skOZ62uDcOpKL5lovLx8zxO5sfXSj8BxvlDYUi9ZuJFNA59aHwsOTBHetz5oGyEP8F91bvCrE0gf5EWutfYpy2qcjVBqWPICfrwy6mLfl0NVH6zp0Qb5cz9SpNKJr6T136v2I3AgWSSGIKDxNTMq7o3FyvcQpDnuMHk0xDi8RLFgZZHdJbf4"
 })
 async function uploadImageToSanity(imageUrl) {
   try {

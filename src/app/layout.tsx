@@ -4,6 +4,7 @@ import './globals.css'
 import NavBar from '@/components/common/NavBar'
 import FooterSection from '@/components/sections/FooterSection'
 import LoadingIndicator from '@/components/common/LoadingIndicator'
+import { Toaster } from '@/components/ui/toaster'
 
 export const metadata: Metadata = {
 	title: 'Furniro E-Commerce Website',
@@ -29,7 +30,7 @@ export default function RootLayout({
 						<FooterSection />
 					</div>
 				</main>
-
+				<Toaster />
 			</body>
 		</html>
 	)

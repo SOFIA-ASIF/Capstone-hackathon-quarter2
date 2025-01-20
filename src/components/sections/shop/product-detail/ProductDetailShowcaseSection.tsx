@@ -7,14 +7,17 @@ import { Button } from "@/components/ui/button";
 import { Product } from "@/types/productType";
 import { useAtom } from "jotai/react";
 import { cartAtom } from "@/lib/jotai";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 
 	const [product, setProduct] = useState<Product | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
-	const[quantity, setQuantity] = useState(0)
+	const[quantity, setQuantity] = useState(1)
 	const[size, setSize] = useState<"S" | "M" | "L">("S")
 	const[cart, setCart] = useAtom(cartAtom)
+	const { toast } = useToast()
 
 	const handleQuantityIncrement = () => {
 		// maximum cannot be more than 5
@@ -132,6 +135,11 @@ const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 			};
 			setCart((prevProducts) => [...prevProducts, productObject]);
 		}
+		toast({
+			title: "Excellent Pick!",
+			description: "Product added to cart successfully",
+			action: <ToastAction altText="Goto schedule to undo">Close</ToastAction>,
+		});
 	};
 
 	return (
@@ -150,7 +158,7 @@ const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 			<div>
 				<p className="text-[40px]">{product.title}</p>
 				<p className="text-[#959595] lg:text-2xl text-lg lg:mt-0 text-[24px] font-medium mt-2">
-					{product.price}$
+					${product.price}
 				</p>
 				<div className="flex items-center gap-[22px]">
 					<div className="flex">

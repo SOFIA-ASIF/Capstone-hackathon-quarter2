@@ -88,7 +88,7 @@ export default function CartSection({ toggleShowCart }: { toggleShowCart: () => 
 						Rs. {subTotal}
 					</p>
 				</div>
-				{subTotal ? (
+				{subTotal > 0 ? (
 					<div>
 						<Separator />
 						<div className="mt-8 flex gap-4 justify-center">

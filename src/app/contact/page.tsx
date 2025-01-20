@@ -5,7 +5,7 @@ import Phone from '@/components/Icons/phone';
 import Time from '@/components/Icons/time';
 import FeaturesBannerSection from '@/components/common/FeaturesBannerSection';
 
-export default function AboutPage() {
+export default function ContactPage() {
 	return (
 		<main>
 			<Hero title='Contact' />

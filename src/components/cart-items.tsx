@@ -1,13 +1,14 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useAtom } from 'jotai/react';
 import { cartAtom } from '@/lib/jotai';
 import { Button } from './ui/button';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const CartItems = () => {
 
+	const router = useRouter()
 	const [subTotal, setSubTotal] = useState(0);
 	const [products, setProducts] = useAtom(cartAtom);
 
@@ -81,7 +82,7 @@ const CartItems = () => {
                         <span className="font-medium text-[16px] leading-6 select-none">Total</span>
                         <span className="text-[#B88E2F] font-medium lg:text-[20px] text-lg leading-7">${subTotal}</span>
                     </div>
-                    <Link href="/checkout" className="text-[#000000] text-center border-2 border-[#000000] py-[14px] text-[20px] leading-7 rounded-lg w-[222px] block mx-auto hover:bg-[#B88E2F] hover:text-white hover:border-[#B88E2F] duration-300 ease-in-out">Check Out</Link>
+					<Link href="/checkout" className="text-[#000000] text-center border-2 border-[#000000] py-[14px] text-[20px] leading-7 rounded-lg w-[222px] block mx-auto hover:bg-[#B88E2F] hover:text-white hover:border-[#B88E2F] duration-300 ease-in-out">Check Out</Link>
                 </div>
 			</div>
 		</section>

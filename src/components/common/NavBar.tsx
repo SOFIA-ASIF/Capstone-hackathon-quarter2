@@ -6,10 +6,12 @@ import Link from "next/link";
 import CartSection from "../sections/shop/CartSection";
 
 import { RemoveScroll } from "react-remove-scroll";
+import { useRouter } from "next/navigation";
 
 function NavBar() {
 	const [showCart, setShowCart] = useState(false);
 	const [menu, setMenu] = useState(false);
+	const router = useRouter();
 
 	const links = [
 		{
@@ -39,7 +41,7 @@ function NavBar() {
 		{
 			iconUrl: "/images/search_icon.png",
 			alt: "search icon",
-			action: () => console.log("You just clicked on the search icon"),
+			action: () => router.push("/search"),
 		},
 		{
 			iconUrl: "/images/heart_icon.png",

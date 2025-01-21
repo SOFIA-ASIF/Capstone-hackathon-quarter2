@@ -1,0 +1,5 @@
+Test Case ID,Test case Description,Test Steps,Expected Results,Actual Results,Status,Severity Level,Assigned To,Remarks
+SA001,Handle No Product Found,go to /products/123,No Product Found,No Product Found,passed,Medium,null,No Issues Found
+SA002,Handle Hydration Error,remove loading state,Product Loading should show,Loading shows as expected,passed,Medium,null,No Issues Found
+SA003,Handle Search Error,Type a product that doesn't exists,Should show no product found,works as expected,passed,Medium,null,No Issues Found
+SA004,Global Cart Management,Try to update cart detail from multiple sections,Cart should update globally,works as expected,passed,Low,null,No Issues Found

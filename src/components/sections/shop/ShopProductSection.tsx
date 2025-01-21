@@ -28,11 +28,11 @@ const ShopProductSection = () => {
     }, []);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div className="text-center text-primary text-[30px] font-bold">Loading Products...</div>;
     }
     
     if (!products) {
-        return <div>Error loading products</div>;
+        return <div className="text-center text-red-500 text-[30px] font-bold">Error loading products</div>;
     }
 
 	return (

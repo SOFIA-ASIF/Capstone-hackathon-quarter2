@@ -50,11 +50,11 @@ const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 	}, [productId]);
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <div className="text-center text-[24px] font-bold text-primary">Loading Product...</div>;
 	}
 
 	if (!product) {
-		return <div>Product not found</div>;
+		return <div className="text-red-500 text-center text-[24px] font-bold">Product not found</div>;
 	}
 
 	const colors = [

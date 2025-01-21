@@ -85,24 +85,20 @@ export default function CartSection({ toggleShowCart }: { toggleShowCart: () => 
 				<div className="flex justify-between mb-[23px]">
 					<p>Subtotal</p>
 					<p className="text-primary text-normal font-semibold">
-						Rs. {subTotal}
+						${subTotal}
 					</p>
 				</div>
-				{subTotal > 0 ? (
-					<div>
-						<Separator />
-						<div className="mt-8 flex gap-4 justify-center">
-							<Button className="bg-white hover:bg-black hover:text-white transition-colors text-black  border border-black rounded-[50px] h-[40px] w-[150px]" onClick={() => router.push("/checkout")}>
-								Check Out
-							</Button>
-							<Button className="bg-white hover:bg-black hover:text-white transition-colors text-black border border-black rounded-[50px] h-[40px] w-[150px]" onClick={() => router.push("/cart")}>
-								Cart
-							</Button>
-						</div>
+				<div>
+					<Separator />
+					<div className="mt-8 flex gap-4 justify-center">
+						<Button className="bg-white hover:bg-black hover:text-white transition-colors text-black  border border-black rounded-[50px] h-[40px] w-[150px]" onClick={() => router.push("/checkout")}>
+							Check Out
+						</Button>
+						<Button className="bg-white hover:bg-black hover:text-white transition-colors text-black border border-black rounded-[50px] h-[40px] w-[150px]" onClick={() => router.push("/cart")}>
+							Cart
+						</Button>
 					</div>
-				) : (
-					<div></div>
-				)}
+				</div>
 			</div>
 		</div>
 	);

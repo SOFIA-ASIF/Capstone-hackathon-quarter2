@@ -46,7 +46,7 @@ const SearchPage = () => {
             </SearchHero>
             <div className='flex flex-col gap-[56px] mx-4 md:mx-[130px]'>
                 {products.length === 0 || searchTerm === '' ? (
-                    <p className='mt-10 text-[24px] text-red-500 font-bold text-center'>No products found.</p> 
+                    <p className='mt-10 text-[24px] text-black text-center'>No products found</p> 
                 ):(
                     <section className='w-full overflow-x-hidden'>
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-[32px] mt-[46px]">

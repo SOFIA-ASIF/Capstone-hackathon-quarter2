@@ -38,7 +38,7 @@ const CartItems = () => {
 					<table className="w-full">
 						<thead className="w-full bg-[#F9F1E7] h-14">
 							<tr>
-							<th scope="col" className="px-6 py-3">Product</th>
+								<th scope="col" className="px-6 py-3">Product</th>
                                 <th scope="col" className="px-6 py-3"></th>
                                 <th scope="col" className="px-6 py-3">Price</th>
                                 <th scope="col" className="px-6 py-3">Quantity</th>

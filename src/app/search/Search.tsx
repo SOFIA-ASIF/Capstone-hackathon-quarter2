@@ -13,13 +13,13 @@ const Search = ({ onSearch }: SearchProps) => {
     };
 
     return (
-        <div>
+        <div className='flex items-center justify-center w-[60%] mx-auto'>
             <input
                 type="text"
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={handleChange}
-                className='border-2 lg:text-base rounded-xl outline-0 py-[10px] px-[31px] border-[#9F9F9F]'
+                className='border-2 lg:text-base w-full rounded-xl outline-0 py-[10px] px-[31px] border-[#9F9F9F]'
             />
         </div>
     );

@@ -2,13 +2,14 @@
 import { useState, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
-import { MinusIcon, PlusIcon, Star } from "lucide-react";
+import { GitCompare, MinusIcon, PlusIcon, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/types/productType";
 import { useAtom } from "jotai/react";
 import { cartAtom } from "@/lib/jotai";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import Link from "next/link";
 
 const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 
@@ -222,6 +223,10 @@ const ProductDetailShowcaseSection = ({ productId }: { productId: string }) => {
 							Add to Cart
 						</Button>
 					</div>
+					<Link href="/comparision" className="flex items-center justify-center">
+						<GitCompare className="size-6 mr-2 text-primary" />
+						<p className="font-medium text-[16px] text-primary">Compare this product</p>
+					</Link>
 				</div>
 
 				<div className="my-[41px]">

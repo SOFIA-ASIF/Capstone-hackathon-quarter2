@@ -55,21 +55,24 @@ function NavBar() {
 		},
 	];
 	const toggleMenu = () => {
-		setMenu(!menu);
+		setMenu(!menu);	
 	};
+
+	const handleCartOpen = () => {
+		setShowCart(!showCart)
+	}
 
 	return (
 		<div className="relative">
-			<div className="md:sticky md:top-0   md:shadow-none z-20 relative">
+			<div className="md:sticky md:top-0 md:shadow-none z-20 relative">
 				{/* DESKTOP */}
-				<div className=" hidden lg:block animate-in fade-in zoom-in bg-white p-4">
+				<div className="hidden lg:block animate-in fade-in zoom-in bg-white p-4">
 					<div className="flex justify-between mx-[41px] items-center">
 						<Link href="/">
 							<div>
 								<img src="/images/logo.png" alt="logo" />
 							</div>
 						</Link>
-
 						<div className="flex gap-[20px] xl:gap-[50px] text-[16px] items-center select-none">
 							{links.map((link, index) => (
 								<Link
@@ -96,10 +99,7 @@ function NavBar() {
 					</div>
 				</div>
 				{/* MOBILE */}
-				<div
-					className={` block lg:hidden shadow-sm  fixed top-0 w-full z-[999] bg-white py-4 animate-in fade-in zoom-in  ${menu ? " !bg-[#FFF3E3] py-2" : ""
-						} `}
-				>
+				<div className={`block lg:hidden shadow-sm  fixed top-0 w-full z-[20] bg-white py-4 animate-in fade-in zoom-in ${menu && " !bg-[#FFF3E3] py-2"}`}>
 					<div className="flex justify-between mx-[10px]">
 						<div className="flex gap-[50px] text-[16px] items-center select-none">
 							<img src="/images/logo.png" alt="logo" className="w-[7rem]" />
@@ -120,8 +120,7 @@ function NavBar() {
 					</div>
 					{menu ? (
 						<div className="my-8 select-none animate-in slide-in-from-right">
-							<div className="flex flex-col gap-8 mt-8 mx-4">
-								{/* Add more links here */}
+							<div className="flex flex-col justify-center items-center gap-8 mt-8 mx-4">
 								{links.map((link, index) => (
 									<Link
 										key={index}
@@ -131,8 +130,7 @@ function NavBar() {
 										<p>{link.title}</p>
 									</Link>
 								))}
-
-								<div className="flex flex-col gap-[40px] select-none">
+								<div className="flex gap-[40px] items-center justify-center select-none">
 									{icons.map((icon, index) => (
 										<img
 											src={icon.iconUrl}
@@ -153,14 +151,13 @@ function NavBar() {
 			{showCart && (
 				<div
 					className="hidden md:block absolute animate-out left-0 right-0 top-0 h-screen bg-black/20 z-[99]"
-					onClick={() => setShowCart(!showCart)}
+					onClick={handleCartOpen}
 				></div>
 			)}
-
-			<div className="hidden md:block md:absolute top-0 right-0 z-[100]">
+			<div className="md:absolute md:top-0 md:right-0 z-[999]">
 				{showCart && (
 					<RemoveScroll>
-						<CartSection toggleShowCart={() => setShowCart(!showCart)} />
+						<CartSection toggleShowCart={handleCartOpen} />
 					</RemoveScroll>
 				)}
 			</div>

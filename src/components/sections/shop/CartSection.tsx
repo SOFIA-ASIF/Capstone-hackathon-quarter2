@@ -33,7 +33,7 @@ export default function CartSection({ toggleShowCart }: { toggleShowCart: () => 
 	}, [products, computeSubTotal]);
 
 	return (
-		<div className="w-[417px] h-[746px] bg-white p-[30px] flex justify-between flex-col">
+		<div className="w-full h-screen md:w-[420px] bg-white z-[999] p-[24px] mt-16 md:mt-0 md:p-[30px] flex justify-start md:justify-between flex-col overflow-y-scroll">
 			<div>
 				<div className="flex justify-between items-center mb-[36px]">
 					<p className="font-semibold text-[24px]">Shopping Cart</p>
@@ -46,7 +46,7 @@ export default function CartSection({ toggleShowCart }: { toggleShowCart: () => 
 					{products.map((product, index) => (
 						<div
 							key={index}
-							className="flex  items-center gap-[32px] w-full justify-between"
+							className="flex items-center gap-[32px] w-full justify-between"
 						>
 							<div>
 								<img
@@ -81,23 +81,22 @@ export default function CartSection({ toggleShowCart }: { toggleShowCart: () => 
 					)}
 				</div>
 			</div>
-			<div>
+			<div className="flex flex-col mt-4">
 				<div className="flex justify-between mb-[23px]">
 					<p>Subtotal</p>
 					<p className="text-primary text-normal font-semibold">
 						${subTotal}
 					</p>
 				</div>
-				<div>
-					<Separator />
-					<div className="mt-8 flex gap-4 justify-center">
-						<Button className="bg-white hover:bg-black hover:text-white transition-colors text-black  border border-black rounded-[50px] h-[40px] w-[150px]" onClick={() => router.push("/checkout")}>
-							Check Out
-						</Button>
-						<Button className="bg-white hover:bg-black hover:text-white transition-colors text-black border border-black rounded-[50px] h-[40px] w-[150px]" onClick={() => router.push("/cart")}>
-							Cart
-						</Button>
-					</div>
+				<Separator />
+				{/* div */}
+				<div className="mt-8 flex gap-4 justify-center">
+					<Button className="bg-white hover:bg-black hover:text-white transition-colors text-black  border border-black rounded-[50px] h-[40px] w-[150px]" onClick={() => router.push("/checkout")}>
+						Check Out
+					</Button>
+					<Button className="bg-white hover:bg-black hover:text-white transition-colors text-black border border-black rounded-[50px] h-[40px] w-[150px]" onClick={() => router.push("/cart")}>
+						Cart
+					</Button>
 				</div>
 			</div>
 		</div>

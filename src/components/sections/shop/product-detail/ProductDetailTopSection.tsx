@@ -9,7 +9,7 @@ const ProductDetailTopSection = ({product_id,}: { product_id: string;}) => {
 	const router = useRouter()
 
 	return (
-		<section className="bg-primary-light px-4 md:px-[70px] flex h-[100px] gap-3 items-center">
+		<section className="hidden md:flex bg-primary-light px-4 md:px-[70px] h-[100px] gap-3 items-center">
 			<div className="text-customGray2 cursor-pointer" onClick={() => router.push("/")}>Home</div>
 			<ChevronRight />
 			<div className="text-customGray2 cursor-pointer" onClick={() => router.push("/shop")}>Shop</div>

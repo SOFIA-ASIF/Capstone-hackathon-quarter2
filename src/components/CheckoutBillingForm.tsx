@@ -5,37 +5,67 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Countries from "@/lib/json/country.json";
 import { BillingInfoInputValidation } from "@/lib/validations";
 import { Button } from "./ui/button";
+import { useAtom } from "jotai";
+import { billingAtom } from "@/lib/jotai";
+import { useEffect } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "./ui/toast";
 
 const FormSchema = BillingInfoInputValidation;
 
 export function CheckoutBillingForm() {
+
+	const [billingInfo, setBillingInfo] = useAtom(billingAtom);
+	const { toast } = useToast();
 
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			firstName: "",
 			lastName: "",
-			company: "",
 			country: "",
 			street: "",
 			town: "",
 			province: "",
-			zipCode: "",
 			phone: "",
 			email: "",
-			additionalInfo: "",
+			bankaccountnumber: "",
 		},
 	});
 
+	function handleSubmit(data: z.infer<typeof FormSchema>) {
+		setBillingInfo(data);
+		console.log("Billing Info Saved:", data);
+		toast({
+			title: "Details Saved!",
+			description: "You can now place your order",
+			action: <ToastAction altText="Goto schedule to undo">Close</ToastAction>,
+		});
+	};
+
+	useEffect(() => {
+		async function fetchBillingInfo() {
+		  if (billingInfo) {
+			form.setValue("firstName", billingInfo?.firstName);
+			form.setValue("lastName", billingInfo?.lastName);
+			form.setValue("country", billingInfo?.country);
+			form.setValue("street", billingInfo?.street);
+			form.setValue("town", billingInfo?.town);
+			form.setValue("province", billingInfo?.province);
+			form.setValue("phone", billingInfo?.phone);
+			form.setValue("email", billingInfo?.email);
+			form.setValue("bankaccountnumber", billingInfo?.bankaccountnumber)
+		  }
+		}
+	
+		fetchBillingInfo();
+	}, [billingInfo]);
+
 	return (
 		<Form {...form}>
-			<form
-				className="w-full space-y-6 pb-32"
-			>
+			<form onSubmit={form.handleSubmit(handleSubmit, (errors) => console.log("validation errors: ", errors))} className="w-full space-y-6 pb-32">
 				<p className="font-bold text-[36px]">Billing details</p>
 				<div className="flex gap-[31px] w-full">
 					<div className="flex-grow">
@@ -46,7 +76,7 @@ export function CheckoutBillingForm() {
 								<FormItem>
 									<FormLabel>First Name</FormLabel>
 									<FormControl>
-										<Input placeholder="" {...field} className="h-[50px]" />
+										<Input placeholder="" type="firstName" {...field} className="h-[50px]" />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -61,7 +91,7 @@ export function CheckoutBillingForm() {
 								<FormItem>
 									<FormLabel>Last Name</FormLabel>
 									<FormControl>
-										<Input placeholder="" {...field} className="h-[50px]" />
+										<Input placeholder="" type="lastName" {...field} className="h-[50px]" />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -69,21 +99,6 @@ export function CheckoutBillingForm() {
 						/>
 					</div>
 				</div>
-
-				<FormField
-					control={form.control}
-					name="company"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Company Name (Optional)</FormLabel>
-							<FormControl>
-								<Input placeholder="" {...field} className="h-[50px]" />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
 				<FormField
 					control={form.control}
 					name="country"
@@ -91,27 +106,12 @@ export function CheckoutBillingForm() {
 						<FormItem>
 							<FormLabel>Country / Region</FormLabel>
 							<FormControl>
-								<Select
-									onValueChange={field.onChange}
-									defaultValue={field.value}
-								>
-									<SelectTrigger className="w-full">
-										<SelectValue placeholder="Select Country" />
-									</SelectTrigger>
-									<SelectContent>
-										{Countries.map((country, index) => (
-											<SelectItem key={index} value={country.name}>
-												{country.name}
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select>
+								<Input placeholder="" type="country" {...field} className="h-[50px]" />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-
 				<FormField
 					control={form.control}
 					name="street"
@@ -119,13 +119,12 @@ export function CheckoutBillingForm() {
 						<FormItem>
 							<FormLabel>Street address</FormLabel>
 							<FormControl>
-								<Input placeholder="" {...field} className="h-[50px]" />
+								<Input placeholder="" type="street" {...field} className="h-[50px]" />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-
 				<FormField
 					control={form.control}
 					name="town"
@@ -133,13 +132,12 @@ export function CheckoutBillingForm() {
 						<FormItem>
 							<FormLabel>Town / City</FormLabel>
 							<FormControl>
-								<Input placeholder="" {...field} className="h-[50px]" />
+								<Input placeholder="" type="town" {...field} className="h-[50px]" />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-
 				<FormField
 					control={form.control}
 					name="province"
@@ -147,27 +145,12 @@ export function CheckoutBillingForm() {
 						<FormItem>
 							<FormLabel>Province</FormLabel>
 							<FormControl>
-								<Input placeholder="" {...field} className="h-[50px]" />
+								<Input placeholder="" type="province" {...field} className="h-[50px]" />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-
-				<FormField
-					control={form.control}
-					name="zipCode"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>ZIP code</FormLabel>
-							<FormControl>
-								<Input placeholder="" {...field} className="h-[50px]" />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
 				<FormField
 					control={form.control}
 					name="phone"
@@ -175,13 +158,12 @@ export function CheckoutBillingForm() {
 						<FormItem>
 							<FormLabel>Phone</FormLabel>
 							<FormControl>
-								<Input placeholder="" {...field} className="h-[50px]" />
+								<Input placeholder="" type="phone" {...field} className="h-[50px]" />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-
 				<FormField
 					control={form.control}
 					name="email"
@@ -189,28 +171,27 @@ export function CheckoutBillingForm() {
 						<FormItem>
 							<FormLabel>Email address</FormLabel>
 							<FormControl>
-								<Input placeholder="" {...field} className="h-[50px]" />
+								<Input placeholder="" type="email" {...field} className="h-[50px]" />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-
 				<FormField
 					control={form.control}
-					name="additionalInfo"
+					name="bankaccountnumber"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Additional Information</FormLabel>
+							<FormLabel>Bank Account Number</FormLabel>
 							<FormControl>
-								<Input placeholder="" {...field} className="h-[50px]" />
+								<Input placeholder="" type="bankaccountnumber" {...field} className="h-[50px]" />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
 				<div className="mt-6">
-					<Button>Save Billing Info</Button>
+					<Button type="submit">Save Billing Info</Button>
 				</div>
 			</form>
 		</Form>

@@ -7,12 +7,10 @@ export const BillingInfoInputValidation = z.object({
   lastName: z.string().min(2, {
     message: "Last name must be at least 2 characters.",
   }),
-  company: z.string(),
   country: z.string().min(1, "Country required field"),
   street: z.string().min(3, "Street required field"),
   town: z.string().min(3, "Town required field"),
   province: z.string().min(3, "Province required field"),
-  zipCode: z.string().min(3, "Zip code required field"),
   phone: z
     .string()
     .min(7, {
@@ -22,7 +20,7 @@ export const BillingInfoInputValidation = z.object({
       message: "Zip code required field",
     }),
   email: z.string().email(),
-  additionalInfo: z.string(),
+  bankaccountnumber: z.string(),
 });
 
 export const PaymentInputValidation = z.object({

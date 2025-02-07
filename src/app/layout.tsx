@@ -7,6 +7,7 @@ import LoadingIndicator from '@/components/common/LoadingIndicator'
 import { Toaster } from '@/components/ui/toaster'
 
 export const metadata: Metadata = {
+	metadataBase: new URL('https://capstone-hackathon-quarter2.vercel.app/'),
 	title: 'Furniro E-Commerce Website',
 	description: 'Get any furniture items on the fly',
 }
